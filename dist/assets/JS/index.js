@@ -1,4 +1,36 @@
-const btns = document.querySelectorAll(".button");
+function removeDet() {
+  const details = this.parentNode;
+  if (details.style.display == "flex") {
+    details.style.display = "none"
+    details.parentNode.querySelector('.read-more').textContent = '> Read More'
+    details.previousElementSibling.classList.remove('pin')
+  }
+}
+
+function showDetails() {
+  const parent = this.parentNode.parentNode.parentNode
+  const details = parent.nextElementSibling
+  if (details.style.display != "flex") {
+    details.style.display = "flex"
+    this.textContent = '> Close'
+    parent.classList.add('pin')
+  } else {
+    details.style.display = "none"
+    this.textContent = '> Read More'
+    parent.classList.remove('pin')
+  }
+}
+
+const btns = document.querySelectorAll(".button")
+const read = document.querySelectorAll(".read-more")
+const closeDet = document.querySelectorAll('.det-close')
+
+read.forEach(cl => {
+  cl.addEventListener("click", showDetails)
+})
+closeDet.forEach(close => {
+  close.addEventListener("click", removeDet)
+})
 
 btns.forEach((btn) => {
   btn.addEventListener("click", function (e) {
